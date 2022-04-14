@@ -8,8 +8,24 @@ const fetchUsers = async () => {
     return data;
 };
 
+const usersFilter = (key, keyValue, list) => list.filter(item => item[key] === keyValue);
+
 router.get('/users', async (req, res) => {
-    const users = await fetchUsers();
+    const { email, name, username } = req.query;
+    let users = await fetchUsers();
+
+    if(email) {
+        users = usersFilter("email", email, users);
+    }
+
+    if(name) {
+        users = usersFilter("name", name, users);
+    }
+
+    if(username) {
+        users = usersFilter("username", username, users);
+    }
+
     res.send({ users })
 });
 
