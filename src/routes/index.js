@@ -13,6 +13,14 @@ router.get('/users', async (req, res) => {
     res.send({ users })
 });
 
+router.get('/users/:id', async (req, res) => {
+    const { id } = req.params;
+    const users = await fetchUsers();
+    const user = users.find(item => item.id === parseInt(id));
+
+    res.send({ user })
+});
+
 module.exports = {
     router
 }
