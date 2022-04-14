@@ -18,6 +18,11 @@ router.get('/users/:id', async (req, res) => {
     const users = await fetchUsers();
     const user = users.find(item => item.id === parseInt(id));
 
+    if(!Boolean(user)) {
+        res.status(404).send({ message: "User not found" });
+        return;
+    }
+    
     res.send({ user })
 });
 
