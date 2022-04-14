@@ -1,8 +1,16 @@
 const router = require("express").Router();
+const axios = require('axios');
+const fakeUsersURL = "https://jsonplaceholder.typicode.com/users";
 
-router.get('/', (req, res) => {
-    console.log("GET method");
-    res.send({ message: "Get method" })
+const fetchUsers = async () => {
+    const res = await axios({ method: 'get', url: fakeUsersURL});
+    const data = await res.data;
+    return data;
+};
+
+router.get('/users', async (req, res) => {
+    const users = await fetchUsers();
+    res.send({ users })
 });
 
 module.exports = {
