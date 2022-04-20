@@ -1,9 +1,12 @@
 const todosRouter = require("express").Router();
 const { connection } = require("../../connections")
+const { TodosModel } = require("../../models/TodosModel");
+
+const model = new TodosModel();
 
 
 todosRouter.get("/todos", (req, res) => {
-    connection.query("SELECT * FROM todos", (error, result, fields) => {
+    model.getTodos((error, result, fields) => {
         if(error) {
             res.status(500).json({ error: "Internal server error" });
             return;
@@ -11,7 +14,8 @@ todosRouter.get("/todos", (req, res) => {
 
         console.log(result)
         res.json({ todos: result })
-    })
+    });
+    //connection.query("SELECT * FROM todos", )
 });
 
 module.exports = {
