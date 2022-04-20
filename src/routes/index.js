@@ -26,6 +26,7 @@ router.get('/users', async (req, res) => {
         users = usersFilter("username", username, users);
     }
 
+    res.set({ "Content-Type": 'application/json' })
     res.send({ users })
 });
 
@@ -39,6 +40,7 @@ router.get('/users/:id', async (req, res) => {
         return;
     }
     
+    res.set({ "Content-Type": 'application/json' })
     res.send({ user })
 });
 
