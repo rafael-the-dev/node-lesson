@@ -20,6 +20,10 @@ class TodosModel {
     setTodo({ name }, func) {
         connection.query("INSERT INTO todos(name) VALUES(?)", [ name ], func);
     }
+
+    updateTodo({ id, name }, func) {
+        connection.query("UPDATE todos SET name=? WHERE ID=?", [ name, id ], func);
+    }
 }
 
 module.exports = {

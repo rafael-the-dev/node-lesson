@@ -67,6 +67,25 @@ todosRouter.post("/todos", (req, res) => {
     })
 });
 
+todosRouter.patch("/todos/:id", (req, res) => {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    if(!name || !id) {
+        res.status(501).json({ error: "Properties are missing" });
+        return;
+    }
+
+    model.updateTodo({ id: parseInt(id), name}, (error, results, fields) => {
+        if(error) {
+            res.status(500).json({ error: "Internal server error" });
+            return;
+        }
+
+        res.status(204).send();
+    })
+})
+
 module.exports = {
     todosRouter
 }
