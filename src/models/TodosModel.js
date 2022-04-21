@@ -14,8 +14,7 @@ class TodosModel {
     }
 
     setTodo({ name }, func) {
-        console.log(name)
-        connection.query("INSERT INTO todos(name) VALUES()", [ name ], func);
+        connection.query("INSERT INTO todos(name) VALUES(?)", [ name ], func);
     }
 }
 
