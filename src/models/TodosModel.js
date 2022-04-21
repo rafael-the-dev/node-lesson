@@ -5,8 +5,12 @@ class TodosModel {
 
     }
 
+    deleteTodo({ id }, func) {
+        connection.query("DELETE FROM todos WHERE ID=?", [ id ], func);
+    }
+
     getTodos(func) {
-        connection.query("SELECT * FROM todos", func)
+        connection.query("SELECT * FROM todos", func);
     }
 
     getTodoByID(id, func) {

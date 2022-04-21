@@ -4,6 +4,25 @@ const { TodosModel } = require("../../models/TodosModel");
 
 const model = new TodosModel();
 
+todosRouter.delete("/todos/:id", (req, res) => {
+    const { id } = req.params;
+
+    if(!id) {
+        res.status(501).json({ error: "Properties are missing" });
+        return;
+    }
+
+    model.deleteTodo({ id: parseInt(id) }, (error, results, fields) => {
+        if(error) {
+            res.status(500).json({ error: "Internal server error" });
+            return;
+        }
+
+        res.status(204).send();
+    })
+
+});
+
 todosRouter.get("/todos", (req, res) => {
     model.getTodos((error, result, fields) => {
         if(error) {
@@ -46,7 +65,7 @@ todosRouter.post("/todos", (req, res) => {
 
         res.status(201).json({ message: "Todo was successfully saved" })
     })
-})
+});
 
 module.exports = {
     todosRouter
