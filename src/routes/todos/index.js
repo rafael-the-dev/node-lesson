@@ -32,7 +32,6 @@ todosRouter.get("/todos/:id", (req, res) => {
 
 todosRouter.post("/todos", (req, res) => {
     const body = req.body;
-    console.log(body)
 
     model.setTodo(body, (error, result, fields) => {
         if(error) {
