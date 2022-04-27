@@ -1,7 +1,9 @@
 const todosRouter = require("express").Router();
+const { db } = require("../../connections/mongodb")
 
-todosRouter.get("/todos", (req, res) => {
-    res.send({ todos: []});
+todosRouter.get("/todos", async (req, res) => {
+    const result = await db().find({ }).toArray();
+    res.send({ todos: [], result});
 })
 
 module.exports = {
