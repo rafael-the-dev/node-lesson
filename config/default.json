@@ -4,5 +4,6 @@
         "host": "localhost",
         "password": "",
         "user": "root"
-    }
+    },
+    "port": 4000
 }
